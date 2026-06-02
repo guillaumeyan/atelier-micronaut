@@ -1,0 +1,16 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/matrix/environnement-combat"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": "{{#assign 'choice'}}{{randomInt lower=1 upper=8}}{{/assign}}{{#if (eq choice '1')}}{\"nom\":\"Glitch du Mérovingien\",\"description\":\"Zone où la réalité se fragmente, les lois physiques sont instables\",\"rolesBoosted\":[\"PROGRAMME\"],\"rolesAffaiblis\":[\"HUMAIN\"]}{{else if (eq choice '2')}}{\"nom\":\"Immeuble abandonné\",\"description\":\"Bâtiment en ruines offrant de nombreuses cachettes\",\"rolesBoosted\":[\"HUMAIN\"],\"rolesAffaiblis\":[\"PROGRAMME\"]}{{else if (eq choice '3')}}{\"nom\":\"Backdoor de l'Architecte\",\"description\":\"Passage secret entre les zones de la Matrix\",\"rolesBoosted\":[\"PROGRAMME\",\"EXILE\"],\"rolesAffaiblis\":[]}{{else if (eq choice '4')}}{\"nom\":\"Toit d'un gratte-ciel\",\"description\":\"Sommet vertigineux où le vent souffle fort, idéal pour les acrobaties\",\"rolesBoosted\":[\"HUMAIN\",\"EXILE\"],\"rolesAffaiblis\":[\"PROGRAMME\"]}{{else if (eq choice '5')}}{\"nom\":\"Métro fantôme\",\"description\":\"Station désaffectée plongée dans l'obscurité, trains surgissant sans prévenir\",\"rolesBoosted\":[\"PROGRAMME\"],\"rolesAffaiblis\":[\"EXILE\"]}{{else if (eq choice '6')}}{\"nom\":\"Dojo de Morpheus\",\"description\":\"Programme d'entraînement au combat rapproché, gravité modifiable\",\"rolesBoosted\":[\"HUMAIN\"],\"rolesAffaiblis\":[]}{{else if (eq choice '7')}}{\"nom\":\"Autoroute de la Méga-City\",\"description\":\"Voie rapide chaotique avec véhicules lancés à pleine vitesse\",\"rolesBoosted\":[\"EXILE\"],\"rolesAffaiblis\":[\"HUMAIN\"]}{{else}}{\"nom\":\"Château du Mérovingien\",\"description\":\"Forteresse luxueuse truffée de pièges et de gardes armés\",\"rolesBoosted\":[\"PROGRAMME\",\"EXILE\"],\"rolesAffaiblis\":[\"HUMAIN\"]}{{/if}}",
+    "transformers": [
+      "response-template"
+    ]
+  }
+}

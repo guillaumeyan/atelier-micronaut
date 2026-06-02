@@ -1,0 +1,93 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/matrix/environnements-combat"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": [
+      {
+        "nom": "Glitch du Mérovingien",
+        "description": "Zone où la réalité se fragmente, les lois physiques sont instables",
+        "rolesBoosted": [
+          "PROGRAMME"
+        ],
+        "rolesAffaiblis": [
+          "HUMAIN"
+        ]
+      },
+      {
+        "nom": "Immeuble abandonné",
+        "description": "Bâtiment en ruines offrant de nombreuses cachettes",
+        "rolesBoosted": [
+          "HUMAIN"
+        ],
+        "rolesAffaiblis": [
+          "PROGRAMME"
+        ]
+      },
+      {
+        "nom": "Backdoor de l'Architecte",
+        "description": "Passage secret entre les zones de la Matrix",
+        "rolesBoosted": [
+          "PROGRAMME",
+          "EXILE"
+        ],
+        "rolesAffaiblis": []
+      },
+      {
+        "nom": "Toit d'un gratte-ciel",
+        "description": "Sommet vertigineux où le vent souffle fort, idéal pour les acrobaties",
+        "rolesBoosted": [
+          "HUMAIN",
+          "EXILE"
+        ],
+        "rolesAffaiblis": [
+          "PROGRAMME"
+        ]
+      },
+      {
+        "nom": "Métro fantôme",
+        "description": "Station désaffectée plongée dans l'obscurité, trains surgissant sans prévenir",
+        "rolesBoosted": [
+          "PROGRAMME"
+        ],
+        "rolesAffaiblis": [
+          "EXILE"
+        ]
+      },
+      {
+        "nom": "Dojo de Morpheus",
+        "description": "Programme d'entraînement au combat rapproché, gravité modifiable",
+        "rolesBoosted": [
+          "HUMAIN"
+        ],
+        "rolesAffaiblis": []
+      },
+      {
+        "nom": "Autoroute de la Méga-City",
+        "description": "Voie rapide chaotique avec véhicules lancés à pleine vitesse",
+        "rolesBoosted": [
+          "EXILE"
+        ],
+        "rolesAffaiblis": [
+          "HUMAIN"
+        ]
+      },
+      {
+        "nom": "Château du Mérovingien",
+        "description": "Forteresse luxueuse truffée de pièges et de gardes armés",
+        "rolesBoosted": [
+          "PROGRAMME",
+          "EXILE"
+        ],
+        "rolesAffaiblis": [
+          "HUMAIN"
+        ]
+      }
+    ]
+  }
+}
