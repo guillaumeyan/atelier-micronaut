@@ -1,0 +1,26 @@
+logger.levels:
+  io.micronaut.data: TRACE
+micronaut:
+  application:
+    name: atelier-micronaut
+endpoints:
+  all:
+    enabled: true
+    sensitive: false
+datasources:
+  default:
+    url: jdbc:postgresql://localhost:5432/matrix_db
+    username: matrix
+    password: matrix
+    driver-class-name: org.postgresql.Driver
+    dialect: POSTGRES
+matrix:
+  api:
+    url: http://localhost:8081
+flyway:
+  datasources:
+    default:
+      enabled: true
+kafka:
+  bootstrap:
+    servers: localhost:29092

@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 import lombok.RequiredArgsConstructor;
 
 @Singleton
@@ -32,8 +33,18 @@ public class ZoneCombat implements ZoneCombatApi {
       gererErreurPersonnageNonTrouve(teamANames, teamBNames, teamA, teamB);
     }
 
-    int scoreTeamA = calculerScoreEquipe(teamA);
-    int scoreTeamB = calculerScoreEquipe(teamB);
+    int scoreTeamA = calculerScoreEquipe(teamA) + ThreadLocalRandom.current()
+        .nextInt(1, 11);
+    int scoreTeamB = calculerScoreEquipe(teamB) + ThreadLocalRandom.current()
+        .nextInt(1, 11);
+
+    // En cas d'égalité résiduelle, on départage aléatoirement
+    while (scoreTeamA == scoreTeamB) {
+      scoreTeamA += ThreadLocalRandom.current()
+          .nextInt(1, 11);
+      scoreTeamB += ThreadLocalRandom.current()
+          .nextInt(1, 11);
+    }
 
     List<Personnage> gagnants;
     List<Personnage> perdants;
@@ -49,15 +60,13 @@ public class ZoneCombat implements ZoneCombatApi {
       nomsPerdants = teamBNames;
       scoreGagnants = scoreTeamA;
       scorePerdants = scoreTeamB;
-    } else if (scoreTeamB > scoreTeamA) {
+    } else {
       gagnants = teamB;
       perdants = teamA;
       nomsGagnants = teamBNames;
       nomsPerdants = teamANames;
       scoreGagnants = scoreTeamB;
       scorePerdants = scoreTeamA;
-    } else {
-      throw new RuntimeException("Impossible !!!");
     }
 
     reportingProvider.ifPresent(provider ->
