@@ -52,6 +52,7 @@ public class MatrixController {
   }
 
   @Post("/combat")
+  @ExecuteOn(TaskExecutors.IO)
   public ResultatCombatDto combattre(@Valid @Body Combattant combattant) {
     List<NomPersonnage> teamANames = Objects.requireNonNullElse(combattant.combattantEquipeA(), List.<String>of())
         .stream()
