@@ -1,5 +1,6 @@
 package io.shodo.matrix.infrastructure.persistence.adapter;
 
+import io.micronaut.data.model.Page;
 import io.micronaut.data.model.Pageable;
 import io.micronaut.data.model.Sort;
 import io.shodo.matrix.domain.model.NomPersonnage;
@@ -8,27 +9,49 @@ import io.shodo.matrix.domain.model.PageResult;
 import io.shodo.matrix.domain.model.Personnage;
 import io.shodo.matrix.domain.model.PersonnageFilter;
 import io.shodo.matrix.domain.spi.PersonnageRepository;
+import io.shodo.matrix.infrastructure.persistence.entity.PersonnageEntity;
+import io.shodo.matrix.infrastructure.persistence.mapper.MatrixMapper;
+import io.shodo.matrix.infrastructure.persistence.repository.JdbcPersonnageRepository;
 import jakarta.inject.Singleton;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+import lombok.RequiredArgsConstructor;
 
 @Singleton
+@RequiredArgsConstructor
 public class PersonnageRepositoryAdapter implements PersonnageRepository {
+
+    private final JdbcPersonnageRepository jdbcPersonnageRepository;
+    private final MatrixMapper matrixMapper;
 
     @Override
     public List<Personnage> findAllByName(List<NomPersonnage> names) {
-        return Collections.emptyList();
+        List<String> nomStrings = names.stream()
+            .map(NomPersonnage::name)
+            .toList();
+        Set<PersonnageEntity> entities =
+            jdbcPersonnageRepository.findByNomInList(nomStrings);
+        return matrixMapper.toDomain(entities);
     }
 
     @Override
     public PageResult<Personnage> rechercher(PersonnageFilter filter, PageRequest pageRequest) {
         Pageable pageable = toPageable(pageRequest);
+        String nomFilter = filter != null && filter.hasNom() ? "%" + filter.nom() + "%" : null;
+        final Page<PersonnageEntity> page;
+        if (nomFilter != null) {
+            page = jdbcPersonnageRepository.findByNomIlike(nomFilter, pageable);
+        } else {
+            page = jdbcPersonnageRepository.find(pageable);
+        }
+        List<Personnage> content = matrixMapper.toDomain(page.getContent());
         return new PageResult<>(
-            Collections.emptyList(),
-            1,
-            100,
-            200,
-            2
+            content,
+            page.getPageNumber(),
+            page.getSize(),
+            page.getTotalSize(),
+            page.getTotalPages()
         );
     }
 

@@ -1,7 +1,4 @@
 datasources:
   default:
-    enabled: false
-flyway:
-  datasources:
-    default:
-      enabled: false
+    url: jdbc:tc:postgresql:16:///matrix_db
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
